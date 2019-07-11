@@ -3,18 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7231C2AB22D62A5400CF6B38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2AA22D62A5400CF6B38 /* AppDelegate.swift */; };
 		7231C2AD22D62A5400CF6B38 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2AC22D62A5400CF6B38 /* SceneDelegate.swift */; };
-		7231C2AF22D62A5400CF6B38 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2AE22D62A5400CF6B38 /* ContentView.swift */; };
+		7231C2AF22D62A5400CF6B38 /* LobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2AE22D62A5400CF6B38 /* LobbyView.swift */; };
 		7231C2B122D62A5700CF6B38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7231C2B022D62A5700CF6B38 /* Assets.xcassets */; };
 		7231C2B422D62A5700CF6B38 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7231C2B322D62A5700CF6B38 /* Preview Assets.xcassets */; };
 		7231C2B722D62A5700CF6B38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7231C2B522D62A5700CF6B38 /* LaunchScreen.storyboard */; };
 		7231C2C222D62A5700CF6B38 /* LocMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2C122D62A5700CF6B38 /* LocMeTests.swift */; };
 		7231C2CD22D62A5700CF6B38 /* LocMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2CC22D62A5700CF6B38 /* LocMeUITests.swift */; };
+		7231C2DC22D62C9A00CF6B38 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 7231C2DB22D62C9A00CF6B38 /* SocketIO */; };
+		7231C2DE22D62FFE00CF6B38 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2DD22D62FFE00CF6B38 /* MapView.swift */; };
+		72C34FD322D63C4100692D41 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C34FD222D63C4100692D41 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +41,7 @@
 		7231C2A722D62A5400CF6B38 /* LocMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7231C2AA22D62A5400CF6B38 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7231C2AC22D62A5400CF6B38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7231C2AE22D62A5400CF6B38 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7231C2AE22D62A5400CF6B38 /* LobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyView.swift; sourceTree = "<group>"; };
 		7231C2B022D62A5700CF6B38 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7231C2B322D62A5700CF6B38 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7231C2B622D62A5700CF6B38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +52,8 @@
 		7231C2C822D62A5700CF6B38 /* LocMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7231C2CC22D62A5700CF6B38 /* LocMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocMeUITests.swift; sourceTree = "<group>"; };
 		7231C2CE22D62A5700CF6B38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7231C2DD22D62FFE00CF6B38 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		72C34FD222D63C4100692D41 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7231C2DC22D62C9A00CF6B38 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +107,9 @@
 			children = (
 				7231C2AA22D62A5400CF6B38 /* AppDelegate.swift */,
 				7231C2AC22D62A5400CF6B38 /* SceneDelegate.swift */,
-				7231C2AE22D62A5400CF6B38 /* ContentView.swift */,
+				7231C2AE22D62A5400CF6B38 /* LobbyView.swift */,
+				7231C2DD22D62FFE00CF6B38 /* MapView.swift */,
+				72C34FD222D63C4100692D41 /* LocationManager.swift */,
 				7231C2B022D62A5700CF6B38 /* Assets.xcassets */,
 				7231C2B522D62A5700CF6B38 /* LaunchScreen.storyboard */,
 				7231C2B822D62A5700CF6B38 /* Info.plist */,
@@ -152,6 +160,9 @@
 			dependencies = (
 			);
 			name = LocMe;
+			packageProductDependencies = (
+				7231C2DB22D62C9A00CF6B38 /* SocketIO */,
+			);
 			productName = LocMe;
 			productReference = 7231C2A722D62A5400CF6B38 /* LocMe.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +235,9 @@
 				Base,
 			);
 			mainGroup = 7231C29E22D62A5400CF6B38;
+			packageReferences = (
+				7231C2DA22D62C9A00CF6B38 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+			);
 			productRefGroup = 7231C2A822D62A5400CF6B38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -268,8 +282,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7231C2AB22D62A5400CF6B38 /* AppDelegate.swift in Sources */,
+				7231C2DE22D62FFE00CF6B38 /* MapView.swift in Sources */,
+				72C34FD322D63C4100692D41 /* LocationManager.swift in Sources */,
 				7231C2AD22D62A5400CF6B38 /* SceneDelegate.swift in Sources */,
-				7231C2AF22D62A5400CF6B38 /* ContentView.swift in Sources */,
+				7231C2AF22D62A5400CF6B38 /* LobbyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +459,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.joshuatabakhoff.LocMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshuatabakhoff.locme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -463,7 +479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.joshuatabakhoff.LocMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joshuatabakhoff.locme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -592,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7231C2DA22D62C9A00CF6B38 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7231C2DB22D62C9A00CF6B38 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7231C2DA22D62C9A00CF6B38 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7231C29F22D62A5400CF6B38 /* Project object */;
 }
