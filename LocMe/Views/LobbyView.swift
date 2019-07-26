@@ -12,6 +12,8 @@ struct LobbyView : View {
     
     @State var roomId: String = ""
     @State var showRoom: Bool = false
+    @EnvironmentObject var socketManager: SocketIOManager
+    @EnvironmentObject var locationManager: LocationManager
     
     var body: some View {
         ZStack{
@@ -27,7 +29,7 @@ struct LobbyView : View {
                 }
                 Spacer()
             }
-            .presentation(showRoom ? Modal(MapView(roomId: roomId, showRoom: $showRoom)){
+            .presentation(showRoom ? Modal(MapView(roomId: roomId, showRoom: $showRoom).environmentObject(locationManager).environmentObject(socketManager)){
                 print("dismissed")
                 self.showRoom = !self.showRoom
             } : nil)

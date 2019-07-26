@@ -11,7 +11,7 @@ import CoreLocation
 import Combine
 
 class LocationManager: NSObject, CLLocationManagerDelegate, BindableObject {
-    private let manager: CLLocationManager
+    private let locManager: CLLocationManager
     var didChange = PassthroughSubject<LocationManager, Never>()
     
     var lastKnownLocation: CLLocation? {
@@ -20,19 +20,19 @@ class LocationManager: NSObject, CLLocationManagerDelegate, BindableObject {
         }
     }
     
-    init(manager: CLLocationManager = CLLocationManager()) {
-        self.manager = manager
+    override init() {
+        self.locManager = CLLocationManager()
         super.init()
+        self.startUpdating()
     }
     
     func startUpdating() {
-        self.manager.delegate = self
-        self.manager.requestWhenInUseAuthorization()
-        self.manager.startUpdatingLocation()
+        self.locManager.delegate = self
+        self.locManager.requestWhenInUseAuthorization()
+        self.locManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations)
         lastKnownLocation = locations.last
     }
     

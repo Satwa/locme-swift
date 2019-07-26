@@ -45,7 +45,8 @@ class SocketIOManager: BindableObject {
         socket.on("naive_attach") {data, ack in
             let room = Room(dictionary: data[0] as! [String : Any])
             
-            print(room)
+            self.room = room
+//            print(room)
             
 //            room.id = room.id as! String
 //            room.users = [ User(id: room.users[0].id, name: room.users[0].name, color: room.users[0].color, lastUpdated: room.users[0].lastUpdated, joinedAt: room.users[0].joinedAt, coordinates: Coordinates(latitude: room.users[0].coordinates.latitude, longitude: room.users[0].coordinates.longitude), transportation: room.users[0].transportation, isOwner: room.users[0].coordinates.isOwner) ]
