@@ -11,25 +11,36 @@ import SwiftUI
 import Combine
 import SocketIO
 
-let manager = SocketManager(socketURL: URL(string: "http://localhost:3022/")!, config: [.log(true), .compress])
+let manager = SocketManager(socketURL: URL(string: "http://localhost:3022/")!, config: [.log(false), .compress])
 let socket = manager.defaultSocket
-
 
 class SocketIOManager: BindableObject {
     let didChange = PassthroughSubject<SocketIOManager,Never>()
-    static let sharedInstance = SocketIOManager()
     
-    
-    var room: Room = Room(id: "randomString", polyline: "", users: []) { // WIP
+    var userRoom: Room = Room(id: "randomString", polyline: "", users: []) { // WIP
+        didSet {
+            print("new data incoming")
+            self.didChange.send(self)
+        }
+    }
+    var room: Room? { // WIP
         didSet {
             print("new data incoming")
             self.didChange.send(self)
         }
     }
     
+    var error: SocketError? {
+        didSet {
+            print("error happened from incoming data")
+            print(error)
+            self.didChange.send(self)
+        }
+    }
+    
     
     init() {
-        // All sockets here
+        // All socket listeners here
         
         socket.on(clientEvent: .connect) {data, ack in
             print("Connected to server")
@@ -39,20 +50,29 @@ class SocketIOManager: BindableObject {
 //                "room": "roomId",
 //                "uuid": UIDevice.current.identifierForVendor!.uuidString
 //            ])
-//            self.messagePublisher.send(data[0] as! Message)
         }
         
         socket.on("naive_attach") {data, ack in
             let room = Room(dictionary: data[0] as! [String : Any])
-            
-            self.room = room
-//            print(room)
-            
-//            room.id = room.id as! String
-//            room.users = [ User(id: room.users[0].id, name: room.users[0].name, color: room.users[0].color, lastUpdated: room.users[0].lastUpdated, joinedAt: room.users[0].joinedAt, coordinates: Coordinates(latitude: room.users[0].coordinates.latitude, longitude: room.users[0].coordinates.longitude), transportation: room.users[0].transportation, isOwner: room.users[0].coordinates.isOwner) ]
-//            print(ack)
-//            self.messagePublisher.send(data[0] as! Message)
+            self.userRoom = room
         }
+        
+        socket.on("room_attach") { data, ack in
+            let response = data[0] as! [String: Any]
+            
+            if (response["success"] as! Bool) == true {
+                print(response["message"]!)
+                print(response["room"]!)
+                
+                self.room = Room(dictionary: response["room"] as! [String : Any])
+            } else {
+                self.error = SocketError(success: false, message: response["message"] as! String)
+            }
+        }
+    } // AYWCVX
+    
+    func joinRoom(_ roomId: String){
+        socket.emit("room_attach", roomId)
     }
     
     

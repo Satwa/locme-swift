@@ -93,3 +93,24 @@ extension Coordinates{
     }
 }
 
+
+struct SocketError: Identifiable, Hashable, Codable {
+    var id: String = UUID().uuidString
+    
+    var success: Bool
+    var message: String
+}
+extension SocketError{
+    init(dictionary: [String: Any]) {
+        self.success = dictionary["success"] as! Bool
+        self.message = dictionary["message"] as! String
+    }
+}
+
+
+struct AlertInformation {
+    var title: String
+    var message: String
+    var primaryButton: Alert.Button
+    var secondaryButton: Alert.Button?
+}

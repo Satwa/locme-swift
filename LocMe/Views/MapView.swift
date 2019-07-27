@@ -14,13 +14,17 @@ struct Map: UIViewRepresentable {
     var coords: CLLocationCoordinate2D?
     
     func makeUIView(context: Context) -> MKMapView {
-        MKMapView(frame: .zero)
+        let view = MKMapView(frame: .zero)
+        view.tintColor = .purple
+        return view
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
+        view.showsUserLocation = true
+        
         let coordinate = CLLocationCoordinate2D(
             latitude: coords?.latitude ?? 0, longitude: coords?.longitude ?? 0)
-        let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
+        let span = MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         view.setRegion(region, animated: true)
     }
@@ -30,6 +34,8 @@ struct Map: UIViewRepresentable {
 struct MapView : View {
     var roomId: String
     @Binding var showRoom: Bool
+    
+    @EnvironmentObject var socketManager: SocketIOManager
     @EnvironmentObject var locationManager: LocationManager
     
     var body: some View {
@@ -37,18 +43,21 @@ struct MapView : View {
             ZStack{
                 Map(coords: locationManager.lastKnownLocation?.coordinate)
                 HStack{
-                    Text("Latitude: " + (locationManager.lastKnownLocation?.coordinate.latitude.description ?? "nil"))
+                    VStack(alignment: .leading){
+                        Spacer()
+                        Text("Latitude: " + (locationManager.lastKnownLocation?.coordinate.latitude.description ?? "nil"))
+                        Text("Longitude: " + (locationManager.lastKnownLocation?.coordinate.longitude.description ?? "nil"))
+                    }
                     Spacer()
-                    Text("Longitude: " + (locationManager.lastKnownLocation?.coordinate.longitude.description ?? "nil"))
                 }
                 .padding()
                 
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle(Text("Room #" + roomId), displayMode: .inline)
-                .navigationBarItems(trailing: Button("OK"){
-                    self.showRoom = !self.showRoom
-                })
+            .navigationBarItems(trailing: Button("OK"){
+                self.showRoom = !self.showRoom
+            })
         }
     }
 }
