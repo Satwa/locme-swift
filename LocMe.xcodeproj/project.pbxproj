@@ -16,7 +16,7 @@
 		7231C2C222D62A5700CF6B38 /* LocMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2C122D62A5700CF6B38 /* LocMeTests.swift */; };
 		7231C2CD22D62A5700CF6B38 /* LocMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2CC22D62A5700CF6B38 /* LocMeUITests.swift */; };
 		7231C2DC22D62C9A00CF6B38 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 7231C2DB22D62C9A00CF6B38 /* SocketIO */; };
-		7231C2DE22D62FFE00CF6B38 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2DD22D62FFE00CF6B38 /* MapView.swift */; };
+		7231C2DE22D62FFE00CF6B38 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231C2DD22D62FFE00CF6B38 /* RoomView.swift */; };
 		724298CA22E464BE003B2151 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724298C922E464BE003B2151 /* SocketIOManager.swift */; };
 		724298CC22E465F2003B2151 /* RoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724298CB22E465F2003B2151 /* RoomModel.swift */; };
 		724298CF22E64AE1003B2151 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724298CE22E64AE1003B2151 /* MapKit.framework */; };
@@ -55,7 +55,7 @@
 		7231C2C822D62A5700CF6B38 /* LocMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7231C2CC22D62A5700CF6B38 /* LocMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocMeUITests.swift; sourceTree = "<group>"; };
 		7231C2CE22D62A5700CF6B38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7231C2DD22D62FFE00CF6B38 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		7231C2DD22D62FFE00CF6B38 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		724298C922E464BE003B2151 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		724298CB22E465F2003B2151 /* RoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>"; };
 		724298CE22E64AE1003B2151 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -156,7 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				7231C2AE22D62A5400CF6B38 /* LobbyView.swift */,
-				7231C2DD22D62FFE00CF6B38 /* MapView.swift */,
+				7231C2DD22D62FFE00CF6B38 /* RoomView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,7 +317,7 @@
 			files = (
 				724298CC22E465F2003B2151 /* RoomModel.swift in Sources */,
 				7231C2AB22D62A5400CF6B38 /* AppDelegate.swift in Sources */,
-				7231C2DE22D62FFE00CF6B38 /* MapView.swift in Sources */,
+				7231C2DE22D62FFE00CF6B38 /* RoomView.swift in Sources */,
 				72C34FD322D63C4100692D41 /* LocationManager.swift in Sources */,
 				7231C2AD22D62A5400CF6B38 /* SceneDelegate.swift in Sources */,
 				724298CA22E464BE003B2151 /* SocketIOManager.swift in Sources */,

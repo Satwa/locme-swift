@@ -48,7 +48,7 @@ struct LobbyView : View {
                         })
                 }
                 .sheet(item: $socketManager.room){ room in
-                    MapView(roomId: self.roomId, showRoom: self.$showRoom).environmentObject(self.locationManager).environmentObject(self.socketManager)
+                    RoomView().environmentObject(self.locationManager).environmentObject(self.socketManager)
                 }
                 Spacer()
             }

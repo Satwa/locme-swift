@@ -31,10 +31,7 @@ struct Map: UIViewRepresentable {
 }
 
 
-struct MapView : View {
-    var roomId: String
-    @Binding var showRoom: Bool
-    
+struct RoomView : View {
     @EnvironmentObject var socketManager: SocketIOManager
     @EnvironmentObject var locationManager: LocationManager
     
@@ -54,9 +51,9 @@ struct MapView : View {
                 
             }
             .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle(Text("Room #" + roomId), displayMode: .inline)
+            .navigationBarTitle(Text("Room #\(socketManager.room?.id ?? "")"), displayMode: .inline)
             .navigationBarItems(trailing: Button("OK"){
-                self.showRoom = !self.showRoom
+                self.socketManager.room = nil
             })
         }
     }
