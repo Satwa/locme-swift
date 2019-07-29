@@ -16,6 +16,8 @@ struct Room: Hashable, Codable, Identifiable {
 //    var directions: [Any] // Directions are stored locally
     
     var users: [User] // max. 2 for now
+    
+    let exists = true // just tryin'
 }
 extension Room {
     init(dictionary: [String: Any]) {
@@ -95,7 +97,7 @@ extension Coordinates{
 
 
 struct SocketError: Identifiable, Hashable, Codable {
-    var id: String = UUID().uuidString
+    let id: String = UUID().uuidString
     
     var success: Bool
     var message: String
@@ -108,7 +110,9 @@ extension SocketError{
 }
 
 
-struct AlertInformation {
+struct AlertInformation: Identifiable {
+    let id: String = UUID().uuidString
+    
     var title: String
     var message: String
     var primaryButton: Alert.Button

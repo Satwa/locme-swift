@@ -12,11 +12,11 @@ import Combine
 
 class LocationManager: NSObject, CLLocationManagerDelegate, BindableObject {
     private let locManager: CLLocationManager
-    var didChange = PassthroughSubject<LocationManager, Never>()
+    var willChange = PassthroughSubject<LocationManager, Never>()
     
     var lastKnownLocation: CLLocation? {
-        didSet {
-            didChange.send(self)
+        willSet {
+            willChange.send(self)
         }
     }
     

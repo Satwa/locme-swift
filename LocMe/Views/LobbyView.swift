@@ -40,36 +40,26 @@ struct LobbyView : View {
                             self.alertInformation = AlertInformation(title: "Code room incorrect", message: "Le code d'une room est de 6 caractères", primaryButton: .default(Text("OK")), secondaryButton: nil)
                         }
                     }
-                    
-                    self.showAlert = true
                 }
-                .presentation($showAlert){
-                    self.alertInformation != nil ? Alert(
-                            title: Text(alertInformation!.title),
-                            message: Text(alertInformation!.message),
-                            dismissButton: alertInformation!.primaryButton
-                        ) : ( self.socketManager.error != nil ? Alert(
-                            title: Text("Erreur serveur"),
-                            message: Text(self.socketManager.error?.message ?? "err"),
-                            dismissButton: .default(Text("OK")){
-                                self.socketManager.error = nil
-                                self.showAlert = false
-                            }) : Alert(title: Text("Information serveur"), message: Text(self.socketManager.error?.message ?? "ok"), dismissButton: .default(Text("OK")){
-                                    self.showAlert = false
-                                    self.showRoom = true
-                                    MapView(roomId: self.roomId, showRoom: self.$showRoom).environmentObject(self.locationManager).environmentObject(self.socketManager)
-                                })
+                .alert(item: $alertInformation){ information in
+                    Alert(
+                        title: Text(alertInformation!.title),
+                        message: Text(alertInformation!.message),
+                        dismissButton: alertInformation!.primaryButton
                     )
-                    // alertInformation ? alert : ( socketError ? alert : mapView )
                 }
-                
-//                    Modal(MapView(roomId: self.roomId, showRoom: self.$showRoom).environmentObject(self.locationManager).environmentObject(self.socketManager))
-//                    {
-//                        print("dismissed")
-//                        self.showRoom = !self.showRoom
-//                    }
-                
-//                Alert(title: Text("Information serveur"), message: Text(self.socketManager.error?.message ?? "ok"), dismissButton: .default(Text("OK")))
+                .alert(item: $socketManager.error){ error in
+                    Alert(
+                        title: Text("Erreur serveur"),
+                        message: Text(self.socketManager.error?.message ?? "err"),
+                        dismissButton: .default(Text("OK")){
+                            self.socketManager.error = nil
+                            self.showAlert = false
+                        })
+                }
+                .sheet(item: $socketManager.room){ room in
+                    MapView(roomId: self.roomId, showRoom: self.$showRoom).environmentObject(self.locationManager).environmentObject(self.socketManager)
+                }
                 Spacer()
             }
             .padding()

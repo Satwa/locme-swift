@@ -15,18 +15,18 @@ let manager = SocketManager(socketURL: URL(string: "http://localhost:3022/")!, c
 let socket = manager.defaultSocket
 
 class SocketIOManager: BindableObject {
-    let didChange = PassthroughSubject<SocketIOManager,Never>()
+    let willChange = PassthroughSubject<SocketIOManager,Never>()
     
-    var userRoom: Room = Room(id: "randomString", polyline: "", users: []) { // WIP
-        didSet {
+    var userRoom: Room = Room(id: "Connecting to server...", polyline: "", users: []) { // WIP
+        willSet {
             print("new data incoming")
-            self.didChange.send(self)
+            self.willChange.send(self)
         }
     }
     var room: Room? { // WIP
-        didSet {
+        willSet {
             print("new data incoming")
-            self.didChange.send(self)
+            self.willChange.send(self)
         }
     }
     
@@ -34,7 +34,7 @@ class SocketIOManager: BindableObject {
         didSet {
             print("error happened from incoming data")
             print(error)
-            self.didChange.send(self)
+            self.willChange.send(self)
         }
     }
     
