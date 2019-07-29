@@ -17,9 +17,6 @@ struct LobbyView : View {
     @State var roomId: String = ""
     @State var showAlert: Bool = false
     
-    @State var alertInformation: AlertInformation?
-
-    
     var body: some View {
         ZStack{
             Color.purple.edgesIgnoringSafeArea(.all)
@@ -35,18 +32,11 @@ struct LobbyView : View {
                         self.socketManager.joinRoom(self.roomId)
                     }else{
                         if self.roomId == self.socketManager.userRoom.id {
-                            self.alertInformation = AlertInformation(title: "Code room incorrect", message: "Vous ne pouvez pas rejoindre votre propre room", primaryButton: .default(Text("OK")), secondaryButton: nil)
+                            self.$socketManager.error.value = SocketError(success: false, message: "Vous ne pouvez pas rejoindre votre propre room")
                         }else{
-                            self.alertInformation = AlertInformation(title: "Code room incorrect", message: "Le code d'une room est de 6 caractères", primaryButton: .default(Text("OK")), secondaryButton: nil)
+                            self.$socketManager.error.value = SocketError(success: false, message: "Le code d'une room est de 6 caractères")
                         }
                     }
-                }
-                .alert(item: $alertInformation){ information in
-                    Alert(
-                        title: Text(alertInformation!.title),
-                        message: Text(alertInformation!.message),
-                        dismissButton: alertInformation!.primaryButton
-                    )
                 }
                 .alert(item: $socketManager.error){ error in
                     Alert(
@@ -68,7 +58,7 @@ struct LobbyView : View {
         .accentColor(.white)
         .tapAction {
             UIApplication.shared.keyWindow?.endEditing(true)
-        }
+        } // LEFDMZ
     }
 }
 
