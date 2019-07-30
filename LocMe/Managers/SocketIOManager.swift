@@ -14,29 +14,10 @@ import SocketIO
 let manager = SocketManager(socketURL: URL(string: "http://localhost:3022/")!, config: [.log(false), .compress])
 let socket = manager.defaultSocket
 
-class SocketIOManager: BindableObject {
-    let willChange = PassthroughSubject<SocketIOManager,Never>()
-    
-    var userRoom: Room = Room(id: "Connecting to server...", polyline: "", users: []) { // WIP
-        willSet {
-            print("new data incoming")
-            self.willChange.send(self)
-        }
-    }
-    var room: Room? { // WIP
-        willSet {
-            print("new data incoming")
-            self.willChange.send(self)
-        }
-    }
-    
-    var error: SocketError? {
-        didSet {
-            print("error happened from incoming data")
-            print(error)
-            self.willChange.send(self)
-        }
-    }
+class SocketIOManager: ObservableObject {
+    @Published var userRoom: Room = Room(id: "Connecting to server...", polyline: "", users: [])
+    @Published var room: Room? = nil
+    @Published var error: SocketError? = nil
     
     
     init() {
@@ -69,7 +50,7 @@ class SocketIOManager: BindableObject {
                 self.error = SocketError(success: false, message: response["message"] as! String)
             }
         }
-    } // AYWCVX
+    }
     
     func joinRoom(_ roomId: String){
         socket.emit("room_attach", roomId)

@@ -6,19 +6,13 @@
 //  Copyright © 2019 Joshua Tabakhoff. All rights reserved.
 //
 
-import SwiftUI
 import CoreLocation
 import Combine
 
-class LocationManager: NSObject, CLLocationManagerDelegate, BindableObject {
+class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     private let locManager: CLLocationManager
-    var willChange = PassthroughSubject<LocationManager, Never>()
     
-    var lastKnownLocation: CLLocation? {
-        willSet {
-            willChange.send(self)
-        }
-    }
+    @Published var lastKnownLocation: CLLocation? = nil
     
     override init() {
         self.locManager = CLLocationManager()

@@ -24,7 +24,7 @@ struct LobbyView : View {
                 Text(socketManager.userRoom.id).bold()
                 Spacer()
                 Text("Rejoindre une room")
-                TextField($roomId, placeholder: Text("Entrez votre code room"))
+                TextField("Entrez votre code room", text: $roomId)
                     .padding(.top)
                     .padding(.bottom)
                 Button("Rejoindre"){

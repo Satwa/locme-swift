@@ -26,7 +26,7 @@ extension Room {
         var decoding_users: [User] = []
         for i in 0..<(dictionary["users"] as! NSArray).count {
             let nontyped = (dictionary["users"] as! NSArray)[i] as! NSDictionary
-            var user = User(
+            let user = User(
                 id: nontyped["id"] as! String,
                 name: nontyped["name"] as! String,
                 color: nontyped["color"] as! String,
