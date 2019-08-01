@@ -47,10 +47,9 @@ struct Map: UIViewRepresentable {
         view.showsUserLocation = true
         view.userTrackingMode = .followWithHeading
         
-        let coordinate = CLLocationCoordinate2D(
-            latitude: locationManager.lastKnownLocation?.coordinate.latitude ?? 0, longitude: locationManager.lastKnownLocation?.coordinate.longitude ?? 0)
+        let coords: CLLocationCoordinate2D? = locationManager.lastKnownLocation?.coordinate
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: coordinate, span: span)
+        let region = MKCoordinateRegion(center: coords ?? CLLocationCoordinate2D(latitude: 0, longitude: 0), span: span)
         
         view.setRegion(region, animated: true)
     }
