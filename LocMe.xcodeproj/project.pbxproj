@@ -60,6 +60,7 @@
 		724298CB22E465F2003B2151 /* RoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>"; };
 		724298CE22E64AE1003B2151 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		72C34FD222D63C4100692D41 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		72E144F922F2FD6D00185686 /* LocMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LocMe.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +114,7 @@
 		7231C2A922D62A5400CF6B38 /* LocMe */ = {
 			isa = PBXGroup;
 			children = (
+				72E144F922F2FD6D00185686 /* LocMe.entitlements */,
 				7231C2AA22D62A5400CF6B38 /* AppDelegate.swift */,
 				7231C2AC22D62A5400CF6B38 /* SceneDelegate.swift */,
 				724298C822E464A9003B2151 /* Managers */,
@@ -486,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LocMe/LocMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "LocMe/Preview\\ Content";
 				DEVELOPMENT_TEAM = Q5Y8T5J8BJ;
@@ -506,6 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LocMe/LocMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "LocMe/Preview\\ Content";
 				DEVELOPMENT_TEAM = Q5Y8T5J8BJ;

@@ -7,29 +7,58 @@
 //
 
 import SwiftUI
+import Combine
 import MapKit
 import CoreLocation
 
 struct Map: UIViewRepresentable {
-    var coords: CLLocationCoordinate2D?
+    @ObservedObject var socketManager: SocketIOManager
+    @ObservedObject var locationManager: LocationManager
+    
+    class MapDelegate: NSObject, MKMapViewDelegate {
+        weak var socketManager: SocketIOManager?
+        
+        func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+            for view in views {
+                if view.annotation is MKUserLocation {
+                    view.canShowCallout = false
+                }
+            }
+        }
+        
+        func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+            socketManager?.updateLocation(userLocation.coordinate)
+        }
+    }
+    
+    let mapDelegate = MapDelegate()
     
     func makeUIView(context: Context) -> MKMapView {
         let view = MKMapView(frame: .zero)
+        
+        view.delegate = mapDelegate
+        mapDelegate.socketManager = socketManager
         view.tintColor = .purple
+        
         return view
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
         view.showsUserLocation = true
+        view.userTrackingMode = .followWithHeading
         
         let coordinate = CLLocationCoordinate2D(
-            latitude: coords?.latitude ?? 0, longitude: coords?.longitude ?? 0)
-        let span = MKCoordinateSpan(latitudeDelta: 1.0, longitudeDelta: 1.0)
+            latitude: locationManager.lastKnownLocation?.coordinate.latitude ?? 0, longitude: locationManager.lastKnownLocation?.coordinate.longitude ?? 0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         let region = MKCoordinateRegion(center: coordinate, span: span)
+        
         view.setRegion(region, animated: true)
     }
 }
 
+
+
+// MARK - SwiftUI View
 
 struct RoomView : View {
     @EnvironmentObject var socketManager: SocketIOManager
@@ -38,7 +67,7 @@ struct RoomView : View {
     var body: some View {
         NavigationView{
             ZStack{
-                Map(coords: locationManager.lastKnownLocation?.coordinate)
+                Map(socketManager: socketManager, locationManager: locationManager)
                 HStack{
                     VStack(alignment: .leading){
                         Spacer()

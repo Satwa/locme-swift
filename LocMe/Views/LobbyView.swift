@@ -56,9 +56,9 @@ struct LobbyView : View {
         }
         .foregroundColor(.white)
         .accentColor(.white)
-        .tapAction {
+        .onTapGesture {
             UIApplication.shared.keyWindow?.endEditing(true)
-        } // LEFDMZ
+        }
     }
 }
 

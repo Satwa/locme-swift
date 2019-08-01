@@ -12,7 +12,9 @@ import Combine
 import SocketIO
 import CoreLocation
 
-let manager = SocketManager(socketURL: URL(string: "http://localhost:3022/")!, config: [.log(false), .compress])
+let ip = "http://192.168.1.15:3022" // "http://localhost:3022/"
+
+let manager = SocketManager(socketURL: URL(string: ip)!, config: [.log(false), .compress])
 let socket = manager.defaultSocket
 
 class SocketIOManager: ObservableObject {
