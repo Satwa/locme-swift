@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import Combine
 import SocketIO
+import CoreLocation
 
 let manager = SocketManager(socketURL: URL(string: "http://localhost:3022/")!, config: [.log(false), .compress])
 let socket = manager.defaultSocket
@@ -27,10 +28,6 @@ class SocketIOManager: ObservableObject {
             print("Connected to server")
             
             socket.emit("join", UIDevice.current.identifierForVendor!.uuidString)
-//            socket.emit("join", [
-//                "room": "roomId",
-//                "uuid": UIDevice.current.identifierForVendor!.uuidString
-//            ])
         }
         
         socket.on("naive_attach") {data, ack in
@@ -42,18 +39,34 @@ class SocketIOManager: ObservableObject {
             let response = data[0] as! [String: Any]
             
             if (response["success"] as! Bool) == true {
-                print(response["message"]!)
-                print(response["room"]!)
-                
                 self.room = Room(dictionary: response["room"] as! [String : Any])
             } else {
                 self.error = SocketError(success: false, message: response["message"] as! String)
+            }
+        }
+        
+        socket.on("room_userjoin") { data, ack in
+            let response = data[0] as! [String: Any]
+            
+            if (response["roomId"] as! String) == self.userRoom.id {
+                self.userRoom.users.append(User(dictionary: response["user"] as! [String : Any]))
+                print("user room")
+            } else {
+                self.room?.users.append(User(dictionary: response["user"] as! [String : Any]))
+                print("guest room")
             }
         }
     }
     
     func joinRoom(_ roomId: String){
         socket.emit("room_attach", roomId)
+    }
+    
+    func updateLocation(_ location: CLLocationCoordinate2D){
+        socket.emit("update_location", [
+            "latitude": location.latitude,
+            "longitude": location.longitude
+        ]) // Server will update socket_uuid position in all rooms
     }
     
     
