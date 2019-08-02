@@ -58,6 +58,18 @@ class SocketIOManager: ObservableObject {
                 print("guest room")
             }
         }
+        
+        socket.on("updated_location") { data, ack in
+            let room = Room(dictionary: data[0] as! [String : Any])
+            
+            print("SocketIO: location update")
+            
+            if room.id == self.userRoom.id {
+                self.userRoom = room
+            } else {
+                self.room = room
+            }
+        }
     }
     
     func joinRoom(_ roomId: String){

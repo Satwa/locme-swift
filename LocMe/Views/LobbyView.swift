@@ -25,6 +25,7 @@ struct LobbyView : View {
                 Spacer()
                 Text("Rejoindre une room")
                 TextField("Entrez votre code room", text: $roomId)
+                    .autocapitalization(.allCharacters)
                     .padding(.top)
                     .padding(.bottom)
                 Button("Rejoindre"){
